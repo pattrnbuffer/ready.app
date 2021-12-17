@@ -12,4 +12,5 @@
 
 source $HOME/.dotfiles/node/env.zsh
 
+# TODO: prototype in node, optimize in rust
 ./ready-to-run.ts $@
