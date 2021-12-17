@@ -1,11 +1,6 @@
-#! /Applications/Ready.app/Contents/Resources/node_modules/.bin/ts-node
+#! ./node_modules/.bin/ts-node
 
-/**
- * https://updater.com
- */
-import { $, argv, glob, path, cd } from "zx";
-
-console.log(argv)
+import { $, argv } from "zx";
 
 const cmd = {
   open: {
