@@ -14,11 +14,11 @@ const cmd = {
 async function main() {
   const [uri] = argv._;
 
-  if (/updater/i.test(uri)) {
+  if (/updater|okta|datadog|terraform|shortcut.com/i.test(uri)) {
     await cmd.open.chrome(uri);
   }
   // open it in firefox
-  else if (/github|npm/i.test(uri)) {
+  else if (/github|npm|prezto|ycombinator|stackoverflow/i.test(uri)) {
     await cmd.open.firefox(uri);
   }
   // open it regsies
