@@ -1,16 +1,5 @@
 #!/usr/bin/env zsh
 
-#
-# https://updater.com
-#
-# https://github.com/updater
-#
-# https://github.com/evanrs
-#
-# http://evanrs.com
-#
+source $HOME/.readyrc
 
-source $HOME/.dotfiles/node/env.zsh
-
-# TODO: prototype in node, optimize in rust
-./ready-to-run.ts $@
+./ready-to-run.ts $@ --bindings $READY_BINDING_PATH
