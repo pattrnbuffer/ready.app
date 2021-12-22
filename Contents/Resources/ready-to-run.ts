@@ -1,29 +1,14 @@
 #! ./node_modules/.bin/ts-node
 
 import { $, argv } from "zx";
+import { allSettledFor } from "./tools";
 
-const cmd = {
-  open: {
-    chrome: (uri: string) =>
-      $`open -a "Google Chrome" ${uri} --args --profile-directory="Profile 3"`,
-    firefox: (uri: string) => $`open -a "Firefox Developer Edition" ${uri}`,
-    safari: (uri: string) => $`open -a "Safari" ${uri}`,
-  },
-};
+import * as protocol from "./protocol";
 
 async function main() {
   const [uri] = argv._;
-
-  if (/updater|okta|datadog|terraform|shortcut.com/i.test(uri)) {
-    await cmd.open.chrome(uri);
-  }
-  // open it in firefox
-  else if (/github|npm|prezto|ycombinator|stackoverflow/i.test(uri)) {
-    await cmd.open.firefox(uri);
-  }
-  // open it regsies
-  else if (uri) {
-    await cmd.open.safari(uri);
+  for (const route of [protocol.http, protocol.cmd]) {
+    route?.mount?.(uri);
   }
 }
 
