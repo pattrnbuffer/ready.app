@@ -1,9 +1,7 @@
+const protocol = /(cmd|command):\/\//;
+
 export const cmd = {
   mount(uri: string) {
-    if (/cmd:\/\//.test(uri)) {
-      // await allSettledFor([
-      //   bind.()
-      // ]);
-    }
+    if (protocol.test(uri)) console.warn("command: not implemented");
   },
 };

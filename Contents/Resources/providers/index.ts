@@ -1,2 +1,3 @@
-export * from "./binding";
-export * as cmd from "./cmd";
+export * as app from "./app";
+export * as binding from "./binding";
+export * as command from "./command";

@@ -1,22 +1,12 @@
-#! ./node_modules/.bin/ts-node
+type BindingProps = {};
 
-import { $ } from "zx";
-import { allSettledFor } from "../tools";
-
-import * as cmds from "./cmd";
-
-type SessionProps = {
-  open: {
-    chrome: string[];
-  };
-};
-
+/**
+ * binding – which is … er, some kind of hook into this whole apparatus
+ */
 export const binding = {
-  session: {
-    start(session?: SessionProps) {
-      return allSettledFor([session?.open?.chrome?.map((url) => cmds.open.chrome(url))]);
-    },
-    async finish(session?: SessionProps) {
+  create: () => ({
+    start(session?: BindingProps) {},
+    finish(session?: BindingProps) {
       // quit apps
       // const pkills = Object.keys(open).map((app) => $`pkill -o -x ${app}`);
       // quit vscode repos
@@ -29,5 +19,5 @@ export const binding = {
       // … TODO: how to gracefully quit dock?
       // return await Promise.allSettled(pkills);
     },
-  },
+  }),
 };
