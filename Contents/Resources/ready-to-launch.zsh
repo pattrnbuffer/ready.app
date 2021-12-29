@@ -11,9 +11,12 @@ if [[ "$URI" =~ $RDYChromeURI ]]; then
 # open it in the 🦊
 elif [[ "$URI" =~ $RDYFirefoxURI ]]; then
   time open -a 'Firefox Developer Edition' $URI
-# open it regular like
-elif [[ "$URI" =~ $RDYSafariURI ]]; then
+# open it in safari
+elif [[ "$URI" =~ ${RDYSafariURI:-"°^"} ]]; then
   time open -a 'Safari' $URI
+# open it all regular like
+# elif [[ "$URI" =~ $RDYURI ]]; then
+#   time open -a $RDYBrowser $URI
 else
   echo "slow match in progress …"
   time './ready-to-run.ts' $@

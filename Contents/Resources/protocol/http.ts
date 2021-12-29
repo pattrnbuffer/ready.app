@@ -2,11 +2,15 @@ import { app } from "../providers";
 
 const protocol = /https?:\/\//;
 
-const { RDYChromeURI, RDYFirefoxURI, RDYSafariURI } = process.env;
+const { RDYChromeURI, RDYFirefoxURI, RDYSafariURI, RDYBrowser } = process.env;
 
-const [chrome, firefox, safari] = [RDYChromeURI, RDYFirefoxURI, RDYSafariURI].map((pattern) =>
-  pattern ? new RegExp(pattern, "i") : void 0,
-);
+const [chrome, firefox, safari] = [
+  RDYChromeURI,
+  RDYFirefoxURI,
+  RDYSafariURI,
+].map((pattern) => (pattern ? new RegExp(pattern, "i") : void 0));
+
+const fallback = app[RDYBrowser?.toLowerCase() as keyof typeof app];
 
 export const http = {
   mount(uri: string) {
@@ -29,7 +33,10 @@ export const http = {
     }
     // open it all regular like
     else {
-      return app.safari.open(uri);
+      return (
+        fallback?.open(uri) ||
+        console.warn("Failed to open default browser:", RDYBrowser)
+      );
     }
   },
 };
