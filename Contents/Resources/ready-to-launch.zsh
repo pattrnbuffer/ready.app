@@ -1,16 +1,24 @@
 #!/usr/bin/env zsh
 
-echo "3, 2, 1 … … … … … … … …… 🚀 … .. … ☁️ . . . ✨"
 source $HOME/.readyrc
 
-# URI=cat $1 sed 's/Updater/updater/'
 URI=$1
+stardate=$(date +'%S')
 
-echo 🔗::"$1"
+manymoons="🌕🌖🌗🌘🌙🌑🌒🌓🌔"
+moon="${manymoons:$(($stardate % ${#manymoons})):1}"
+echo "…. …. … … … … … … … … …… $moon … .. … ☁️ . . . ✨"
 
+if [ -z "$URI" ]; then; exit 0; fi;
+
+earthstars="🌍🌎🌏⚡️🚀🛰💫"
+star="${earthstars[$(($stardate % ${#earthstars}))]}"
+echo "3, 2, 1 … … … … … … … …… $star … .. … ☁️ . . . ✨"
+
+echo 🔗::"$URI"
 # open it in chrome
 if [[ "$URI" =~ $RDYChromeURI ]]; then
-  echo 🏄🏽::chrome
+  echo 🏄::chrome
   time open -a 'Google Chrome' $URI --args --profile-directory='Profile 3'
 # open it in the fox
 elif [[ "$URI" =~ $RDYFirefoxURI ]]; then
@@ -22,7 +30,7 @@ elif [[ "$URI" =~ ${RDYSafariURI:-"°^"} ]]; then
   time open -a 'Safari' $URI
 # open it all regular like
 elif [[ "$URI" =~ $RDYURI ]]; then
-  echo 🏄‍♂️::default
+  echo 🌊::default
   time open -a $RDYBrowser $URI
 # check for prototypes
 else
