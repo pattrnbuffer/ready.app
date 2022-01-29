@@ -1,7 +1,7 @@
 import { obj } from "../../tools";
 
-const allRepositoryFields = obj.defaults(
-  { toString: () => allRepositoryFields.join(" ") },
+export const repositoryFields = obj.defaults(
+  { toString: () => repositoryFields.join(" ") },
   {
     assignableUsers: true,
     codeOfConduct: true,
@@ -65,5 +65,5 @@ const allRepositoryFields = obj.defaults(
     viewerPossibleCommitEmails: true,
     viewerSubscription: true,
     "watchers  ": true,
-  },
+  }
 );

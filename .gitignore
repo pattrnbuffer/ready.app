@@ -1,6 +1,9 @@
-.vscode
-.local
+.vscode/
+*.local/
 .local.*
+
+# build?
+build/
 
 # Logs
 logs

@@ -1,4 +1,4 @@
-#! ./node_modules/.bin/ts-node
+#! /usr/bin/env node
 
 import { argv } from "zx";
 import { allSettledFor } from "./tools";

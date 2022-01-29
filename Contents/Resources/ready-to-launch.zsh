@@ -3,37 +3,42 @@
 source $HOME/.readyrc
 
 URI=$1
-stardate=$(date +'%S')
 
-manymoons="🌕🌖🌗🌘🌙🌑🌒🌓🌔"
-moon="${manymoons:$(($stardate % ${#manymoons})):1}"
-echo "…. …. … … … … … … … … …… $moon … .. … ☁️ . . . ✨"
+# compile on app load
+if [ -z "$URI" ]; then;
+  tsc && chmod +x ./build/*
+  manymoons="🌕🌖🌗🌘🌙🌑🌒🌓🌔"
+  stardate=$(date +'%S')
+  moon="${manymoons:$(($stardate % ${#manymoons})):1}"
+  echo "…. …. … … … … … … … … …… $moon … .. … ☁️ . . . ✨"
 
-if [ -z "$URI" ]; then; exit 0; fi;
+  exit 0;
+fi;
 
+echo 🔗::"$URI"
 earthstars="🌍🌎🌏⚡️🚀🛰💫"
+stardate=$(date +'%S')
 star="${earthstars[$(($stardate % ${#earthstars}))]}"
 echo "3, 2, 1 … … … … … … … …… $star … .. … ☁️ . . . ✨"
 
-echo 🔗::"$URI"
-# open it in chrome
 if [[ "$URI" =~ $RDYChromeURI ]]; then
+  # open it in chrome
+  open -a 'Google Chrome' $URI --args --profile-directory='Profile 3'
   echo 🏄::chrome
-  time open -a 'Google Chrome' $URI --args --profile-directory='Profile 3'
-# open it in the fox
 elif [[ "$URI" =~ $RDYFirefoxURI ]]; then
+  # open it in the fox
+  open -a 'Firefox Developer Edition' $URI
   echo 🦊::firefox
-  time open -a 'Firefox Developer Edition' $URI
-# open it in safari
 elif [[ "$URI" =~ ${RDYSafariURI:-"°^"} ]]; then
+  # open it in safari
+  open -a 'Safari' $URI
   echo 🦁::safari
-  time open -a 'Safari' $URI
-# open it all regular like
-elif [[ "$URI" =~ $RDYURI ]]; then
-  echo 🌊::default
-  time open -a $RDYBrowser $URI
-# check for prototypes
-else
+# # TODO: narrow default constraint
+# elif [[ "$URI" =~ $RDYURI ]]; then
+#   # open it all regular like
+#   open -a $RDYBrowser $URI
+#   echo 🌊::default
+else # check for prototypes
+  ./build/ready-to-run.js $@
   echo 🧫::prototype
-  time './ready-to-run.ts' $@
 fi
