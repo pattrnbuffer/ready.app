@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 source $HOME/.readyrc
+unsetopt CASE_MATCH
 
 URI=$1
 
