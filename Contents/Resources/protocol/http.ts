@@ -21,7 +21,7 @@ export const http = {
 
     // open it in chrome
     if (chrome?.test(uri)) {
-      return app.chrome.open(uri);
+      return app.chrome.open(uri, { profile: process.env.RDYChromeProfile });
     }
     // open it in the 🦊
     else if (firefox?.test(uri)) {
