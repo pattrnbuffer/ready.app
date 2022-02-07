@@ -17,7 +17,7 @@ if [ -z "$URI" ]; then;
 fi;
 
 echo 🔗::"$URI"
-earthstars="🌍🌎🌏⚡️🚀🛰💫"
+earthstars="🌍🌎🌏🚀🛰💫"
 stardate=$(date +'%S')
 star="${earthstars[$(($stardate % ${#earthstars}))]}"
 echo "3, 2, 1 … … … … … … … …… $star … .. … ☁️ . . . ✨"
