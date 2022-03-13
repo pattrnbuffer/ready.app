@@ -7,7 +7,7 @@ URI=$1
 
 # compile on app load
 if [ -z "$URI" ]; then;
-  tsc && chmod +x ./build/*
+  npm exec tsc && chmod +x ./build/*
   manymoons="🌕🌖🌗🌘🌙🌑🌒🌓🌔"
   stardate=$(date +'%S')
   moon="${manymoons:$(($stardate % ${#manymoons})):1}"
@@ -24,7 +24,7 @@ echo "3, 2, 1 … … … … … … … …… $star … .. … ☁️ .
 
 if [[ "$URI" =~ $RDYChromeURI ]]; then
   # open it in chrome
-  open -a 'Google Chrome' $URI --args --profile-directory='Profile 3'
+  open -a 'Google Chrome' $URI --args --profile-directory="$RDYChromeProfile"
   echo 🏄::chrome
 elif [[ "$URI" =~ $RDYFirefoxURI ]]; then
   # open it in the fox
@@ -34,11 +34,11 @@ elif [[ "$URI" =~ ${RDYSafariURI:-"°^"} ]]; then
   # open it in safari
   open -a 'Safari' $URI
   echo 🦁::safari
-# # TODO: narrow default constraint
-# elif [[ "$URI" =~ $RDYURI ]]; then
-#   # open it all regular like
-#   open -a $RDYBrowser $URI
-#   echo 🌊::default
+# TODO: narrow default constraint
+elif [[ "$URI" =~ $RDYURI ]]; then
+  # open it all regular like
+  open -a $RDYBrowser $URI
+  echo 🌊::default
 else # check for prototypes
   ./build/ready-to-run.js $@
   echo 🧫::prototype
